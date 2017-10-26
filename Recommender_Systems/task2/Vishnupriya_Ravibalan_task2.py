@@ -7,12 +7,11 @@ import math
 sc = SparkContext(appName="inf553")
 sqlc = SQLContext(sc)
 
-df = sc.textFile('ratings.csv').map(lambda line:[(line.strip().split(',')[0]),(line.strip().split(',')[1]),(line.strip().split(',')[2])])
+df = sc.textFile(sys.argv[1]).map(lambda line:[(line.strip().split(',')[0]),(line.strip().split(',')[1]),(line.strip().split(',')[2])])
 header = df.first()
 full_df = df.filter(lambda line:line!=header).toDF()
 full_df = full_df.select(col("_1").alias('userID'),col("_2").alias('movieID'),col("_3").alias('ratings'))
-full_df.count()
-df_1 = sc.textFile('testing_small.csv',6).map(lambda l:[(l.strip().split(',')[0]),(l.strip().split(',')[1])])
+df_1 = sc.textFile(sys.argv[2],6).map(lambda l:[(l.strip().split(',')[0]),(l.strip().split(',')[1])])
 header = df_1.first()
 test_df = df_1.filter(lambda line:line!=header).toDF()
 test_df = test_df.select(col("_1").alias('userID'),col("_2").alias('movieID'))
@@ -147,7 +146,7 @@ for i in range(len(final)):
         finallist.append(((i+1,final[i][1][j][0]),final[i][1][j][1]))
 final_rdd = sc.parallelize(finallist).sortByKey(ascending=True).collect()
 
-op = open(sys.argv[1],"w")    
+op = open(sys.argv[3],"w")    
 header = "userID,movieID,rating"  
 op.write(header+"\n")
 for i in final_rdd:
@@ -177,7 +176,7 @@ print ">=3 and <4: ",ratingcompare[3]
 print ">=4: ",ratingcompare[4]
 
 rmse = math.pow(float(sum(se))/float(len(se)),-2)
-print rmse
+print "RMSE =",rmse
 
 
 
