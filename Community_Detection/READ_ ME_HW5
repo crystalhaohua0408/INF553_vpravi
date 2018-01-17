@@ -1,0 +1,26 @@
+
+INSTRUCTIONS ON HOW TO RUN CODE
+================================
+
+Input file names : ratings.csv
+Source Code file name: Vishnupriya_Ravibalan_community.py
+Output file name: Vishnupriya_Ravibalan_betweenness.txt,Vishnupriya_Ravibalan_communities.txt
+
+How to run?
+1. Move the input files and source code file inside the spark-1.6.1-bin-hadoop2.4 folder in your machine
+2. In terminal enter the same spark-1.6.1-bin-hadoop2.4 directory and run the following command.
+
+Command to enter directory -->
+
+	cd spark-1.6.1-bin-hadoop2.4 
+
+Command used to run source code -->
+
+	./bin/spark-submit Vishnupriya_Ravibalan_community.py ratings.csv Vishnupriya_Ravibalan_betweenness.txt Vishnupriya_Ravibalan_communities.txt
+
+Command used to run source code if you want to see exceution time-->
+
+	time ./bin/spark-submit Vishnupriya_Ravibalan_community.py ratings.csv Vishnupriya_Ravibalan_betweenness.txt Vishnupriya_Ravibalan_communities.txt
+
+
+
